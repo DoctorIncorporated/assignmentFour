@@ -15,7 +15,7 @@ module.exports = function(passport){
                 return done(null, false, {message:"No User found."})
             }
 
-            //campares passwords
+            //compares passwords
             bcrypt.compare(password, user.password, function(err, isMatch){
                 if(err)throw err;
                 if(isMatch){
