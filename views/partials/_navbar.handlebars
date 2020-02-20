@@ -13,21 +13,27 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/game/allgames">All Games</a>
+                    </li>
                     {{#if user}}
                     <li class="nav-item">
-                        <a class="nav-link" href="/game/games">Game List</a>
+                        <a class="nav-link" href="/game/games">Your Games</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/game/gameentry/gameentryadd">Add Game</a>
-                    </li>                    
-                    {{/if}}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/logout">Logout</a>
+                    </li>
+                    {{else}}
                     <li class="nav-item">
                         <a class="nav-link" href="/users/login">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/users/register">Register</a>
                     </li>
-                    
+                    {{/if}}
                 </ul>
             </div>
         </div>

@@ -1,0 +1,10 @@
+{{#each usersGames}}
+<div class="card card-body">
+	<h3>{{name}}</h3>
+	<h4>{{title}}</h4>
+	<p>${{price}}</p>
+	<p>{{description}}</p>
+</div>
+{{else}}
+<p>No Game Entries Found</p>
+{{/each}}

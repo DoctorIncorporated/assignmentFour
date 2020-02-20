@@ -5,9 +5,64 @@ var {ensureAuthenticated} = require("../helper/auth");
 
 //load game model
 require('../models/Game');
+require('../models/User')
 var Game = mongoose.model('games');
+var User = mongoose.model('users')
 
 //Game Entry CRUD route
+
+router.get('/allgames', function(req, res){
+    var usersGames = []
+
+    //Add every other users' games
+    User.find().then(function(users){
+        Game.find().then(function(games){
+            users.forEach(user => {
+                games.forEach(game => {
+                    if(user._id == game.user){
+                        try{
+                            if(user._id == req.user.id){
+                                game.user = ""
+                                usersGames.unshift({
+                                    name:"(You) "+user.name,
+                                    title:game.title,
+                                    price:game.price,
+                                    description:game.description
+                                })
+                            } else {
+                                throw ""
+                            }
+                        }catch{
+                            game.user = ""
+                            usersGames.push({
+                                name:user.name,
+                                title:game.title,
+                                price:game.price,
+                                description:game.description
+                            })
+                        }
+                    }
+                })
+            })
+
+            //Add games from users who no longer exist
+            games.forEach(game => {
+                if(game.user != ""){
+                    usersGames.push({
+                        name:"[DELETED USER]",
+                        title:game.title,
+                        price:game.price,
+                        description:game.description
+                    })
+                }
+            })
+
+            res.render('gameentry/displayall', {
+                usersGames:usersGames
+            })
+        })
+    })
+})
 
 router.get('/games', ensureAuthenticated, function(req, res){
     Game.find({user:req.user.id}).then(function(games){
@@ -16,7 +71,7 @@ router.get('/games', ensureAuthenticated, function(req, res){
         res.render('gameentry/index',{
             games:games
         });
-    });    
+    });
 });
 
 router.get('/gameentry/gameentryadd', ensureAuthenticated, function(req, res){
