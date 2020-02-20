@@ -1,0 +1,9 @@
+npm install handlebars@4.5.3
+//Jordan used it to make "localhost:5000/games" display properly, I uninstalled it and it still worked
+
+
+//In CMD window that is in GameLibrary folder
+npx heroku login
+npx heroku create
+npx heroku git:remote -a /*name of heroku app created*/   //got from website might be logged in
+git push heroku master

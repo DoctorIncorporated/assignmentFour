@@ -1,0 +1,20 @@
+<h1>Edit Games</h1>
+
+<div class="card card-body">
+    <form action="/game/gameedit/{{game.id}}?_method=PUT" method="POST">
+        <div class="form-group">
+            <label for="title">Title of Game</label>
+			<input type='hidden' name="_method" value="PUT">
+            <input type="text" name="title" class='form-control' value='{{game.title}}' required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price Paid for Game</label>
+            <input type="text" name="price" class='form-control' value='{{game.price}}' required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description of Game</label>
+            <textarea name="description" class='form-control' required>{{game.description}}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
